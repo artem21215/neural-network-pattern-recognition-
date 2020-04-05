@@ -3,7 +3,7 @@ int input(char s[6], int arr[])
 {
     FILE* f;
     int width, hight;
-    int i, z, bitpix = 0, bitew, b[8];
+    int i,j, z, bitpix = 0, bitew, b[8];
     for (i = 0; i < 8; i++)
         b[i] = 0;
     f = fopen(s, "rb");
@@ -23,7 +23,9 @@ int input(char s[6], int arr[])
     else
         bitew = width / 32;
     bitew *= 4;
-
+    j=0;
+int p=0;
+for (int gg=0;gg<hight;gg++){
     for (i = 0; i < bitew; i++) {
         z = 0;
         fread(&z, 1, 1, f);
@@ -31,7 +33,24 @@ int input(char s[6], int arr[])
             b[j] = 0;
 
         bitetobin(z, b);
+	    for (int jj=0;jj<8;jj++){
+		if (p%(bitew*8)<width){
+		    arr[j]=b[p%8];
+		    j++;
+		    }
+		p++;
+		}
+
+
     }
+}
+puts("");
+	for (int kk=0;kk<width*hight;kk++){
+		printf("%d ",arr[kk]);
+		if (kk%10==0)
+			printf("\n%d - ",kk);
+}
+puts("");
 
     fclose(f);
     printf("%d\n", width);

@@ -6,5 +6,6 @@ int main()
 {
     int* a;
     input("2.bmp",a);
+//	printf("%d ",a[10]);
     return 0;
 }
