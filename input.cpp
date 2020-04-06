@@ -1,9 +1,9 @@
 void bitetobin(int z, int b[]);
-int input(char s[6], int arr[])
+int* input(char s[6], int arr[], int* kpixel)
 {
     FILE* f;
     int width, hight;
-    int i,j, z, bitpix = 0, bitew, b[8];
+    int i, j, z, bitpix = 0, bitew, b[8];
     for (i = 0; i < 8; i++)
         b[i] = 0;
     f = fopen(s, "rb");
@@ -13,7 +13,7 @@ int input(char s[6], int arr[])
     fread(&hight, 4, 1, f);
     fseek(f, 28, SEEK_SET);
     fread(&bitpix, 2, 1, f);
-
+    *kpixel = width * hight;
     arr = new int[width * hight];
     // 2 color and 4 bite min * bitpix
     fseek(f, 54 + 4 * bitpix * 2, SEEK_SET);
@@ -23,41 +23,27 @@ int input(char s[6], int arr[])
     else
         bitew = width / 32;
     bitew *= 4;
-    j=0;
-int p=0;
-for (int gg=0;gg<hight;gg++){
-    for (i = 0; i < bitew; i++) {
-        z = 0;
-        fread(&z, 1, 1, f);
-        for (int j = 0; j < 8; j++)
-            b[j] = 0;
+    j = 0;
+    int p = 0;
+    for (int gg = 0; gg < hight; gg++) {
+        for (i = 0; i < bitew; i++) {
+            z = 0;
+            fread(&z, 1, 1, f);
+            for (int j = 0; j < 8; j++)
+                b[j] = 0;
 
-        bitetobin(z, b);
-	    for (int jj=0;jj<8;jj++){
-		if (p%(bitew*8)<width){
-		    arr[j]=b[p%8];
-		    j++;
-		    }
-		p++;
-		}
-
-
+            bitetobin(z, b);
+            for (int jj = 0; jj < 8; jj++) {
+                if (p % (bitew * 8) < width) {
+                    arr[j] = b[p % 8];
+                    j++;
+                }
+                p++;
+            }
+        }
     }
-}
-puts("");
-	for (int kk=0;kk<width*hight;kk++){
-		printf("%d ",arr[kk]);
-		if (kk%10==0)
-			printf("\n%d - ",kk);
-}
-puts("");
-
     fclose(f);
-    printf("%d\n", width);
-    printf("%d\n", hight);
-    printf("%d\n", bitpix);
-
-    return 0;
+    return arr;
 }
 
 void bitetobin(int z, int b[])
