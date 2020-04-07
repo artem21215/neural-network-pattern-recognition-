@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "input.cpp"
+#include "input.h"
+#include "network.h"
 void printpixel(int arr[], int n);
 int main()
 {
