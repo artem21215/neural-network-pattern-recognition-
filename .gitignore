@@ -1,6 +1,5 @@
 *.o
 *.swp
-*.c!
-*.htm*
 *.bmp
 *.out
+*.d
