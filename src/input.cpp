@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 void bitetobin(int z, int b[]);
-int* input(char s[6], int arr[], int* kpixel)
+int* input(char s[15], int arr[], int* kpixel)
 {
     FILE* f;
     int width, hight;

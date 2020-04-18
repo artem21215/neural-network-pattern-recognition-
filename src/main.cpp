@@ -2,7 +2,8 @@
 #include "network.h"
 int main()
 {
-    int *a, kpixel = 0, **Network, ***Weight;
+    int *a, kpixel = 0, **Network;
+    float ***Weight;
     a = input("files_bmp/1.bmp", a, &kpixel);
     // printpixel(a, kpixel);
     Network = new int*[4];
@@ -12,6 +13,7 @@ int main()
     Network[3] = new int[10];
     Network[0] = a;
     // printpixel(Network[0], kpixel);
-    RandomNetwork(kpixel);
+    //RandomNetwork(kpixel);
+    Weight = getW(Weight);
     return 0;
 }
