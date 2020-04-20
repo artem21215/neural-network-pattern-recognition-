@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 void bitetobin(int z, int b[]);
-int* input(char s[6], int arr[], int* kpixel)
+float* input(char s[15], float arr[], int* kpixel)
 {
     FILE* f;
     int width, hight;
@@ -16,7 +16,7 @@ int* input(char s[6], int arr[], int* kpixel)
     fseek(f, 28, SEEK_SET);
     fread(&bitpix, 2, 1, f);
     *kpixel = width * hight;
-    arr = new int[width * hight];
+    arr = new float[width * hight];
     // 2 color and 4 bite min * bitpix
     fseek(f, 54 + 4 * bitpix * 2, SEEK_SET);
     // 8 pixel in bite. min=4 bite, 4*8=32 pixel
@@ -77,7 +77,7 @@ void printpixel(int arr[], int n)
     puts("");
     for (int kk = 0; kk < n; kk++) {
         printf("%d ", arr[kk]);
-        if (kk % 10 == 0)
+        if (kk % 28 == 0)
             printf("\n%d - ", kk);
     }
     puts("");
