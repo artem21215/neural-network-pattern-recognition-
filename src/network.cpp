@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+float VComp(float* W,float* N,int n);
 float sigmoid(float x)
 {
     float z;
     z = 1 / (1 + expl(-x));
-    printf("%.10f", z);
     return z;
 }
 
@@ -61,4 +61,45 @@ float*** getW(float ***Weight)
     
     fclose(f);
 return Weight;
+}
+
+int* get_info(int* mas_info)
+{
+FILE* f;
+int nn;
+f=fopen("src/optionnet.dat","rb");
+fread(&nn, sizeof(int), 1, f);
+mas_info=new int[nn+1];
+mas_info[0]=nn;
+for (int i=1;i<nn+1;i++)
+    fread(&mas_info[i], sizeof(int), 1, f);
+fclose(f);
+return mas_info;
+}
+
+int result(float*** Weight,float** Network,int* mas_info)
+{
+    int i,j;
+    for (i=1;i<mas_info[0];i++)
+    {
+        for (j=0;j<mas_info[i+1];j++)
+            {
+            //printf("%d ",j);    
+            Network[i][j]=VComp(Weight[i-1][j],Network[i-1],mas_info[i]);
+            }
+    }
+    int maxx=0;
+    for (i=1;i<mas_info[mas_info[0]];i++)
+        if (Network[mas_info[0]-1][i]>Network[mas_info[0]-1][maxx])
+            maxx=i;
+return maxx;
+}
+
+float VComp(float* W,float* N,int n)
+{
+    int i,summ=0;
+    for (i=0;i<n;i++)
+        summ+=W[i]*N[i];
+summ=sigmoid(summ);
+return summ;
 }
