@@ -5,9 +5,12 @@
 float VComp(float* W, float* N, int n);
 float sigmoid(float x)
 {
-    float z;
-    z = 1 / (1 + expl(-x));
-    return z;
+    return 1 / (1 + expl(-x));
+}
+
+float difsigmoid(float x)
+{
+    return 1/(2+expl(-x)+expl(x));
 }
 
 void RandomNetwork(int kpixel)
@@ -94,4 +97,7 @@ float VComp(float* W, float* N, int n)
         summ += W[i] * N[i];
     summ = sigmoid(summ);
     return summ;
+}
+
+void Grad(){
 }
