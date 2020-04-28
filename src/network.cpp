@@ -99,5 +99,3 @@ float VComp(float* W, float* N, int n)
     return summ;
 }
 
-void Grad(){
-}

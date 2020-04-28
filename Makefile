@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-c -Wall -MP -MMD
 EXECUTABLE=bin/Network.out
-SOURSES=src/main.cpp src/input.cpp src/network.cpp
+SOURSES=src/main.cpp src/input.cpp src/network.cpp src/learn.cpp
 OBJECTSS=$(SOURSES:.cpp=.out)
 OBJECTS=$(patsubst src/%,build/%,$(OBJECTSS))
 

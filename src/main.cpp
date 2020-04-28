@@ -1,10 +1,11 @@
 #include "input.h"
 #include "network.h"
 #include <stdio.h>
+#include "learn.h"
 int main()
 {
     int kpixel = 0, *mas_info;
-    float *a, ***Weight, **Network;
+    float *a, ***Weight, **Network,***Grad;
     a = input("files_bmp/1.bmp", a, &kpixel);
     // printpixel(a, kpixel);
     Network = new float*[4];
@@ -17,6 +18,7 @@ int main()
     // RandomNetwork(kpixel);
     Weight = getW(Weight);
     mas_info = get_info(mas_info);
+    Grad=CreateGrad(Grad,mas_info);
     printf("%d\n", result(Weight, Network, mas_info));
     return 0;
 }
