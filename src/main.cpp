@@ -4,6 +4,7 @@
 #include <stdio.h>
 int main()
 {
+    char s[] = "files_bmp/1.bmp";
     int kpixel = 0, *mas_info, i;
     float *a, ***Weight, **Network, ***Grad;
     a = input("files_bmp/01.bmp", a, &kpixel);
