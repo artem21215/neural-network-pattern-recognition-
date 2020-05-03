@@ -99,14 +99,13 @@ float VComp(float* W, float* N, int n)
     return summ;
 }
 
-float itog(char* s, float** Network, int* mas_info)
+float cost(char* s, float** Network, int* mas_info,int N)
 {
-    int i, j;
-    float cost = 0;
-    for (i = 0; i < mas_info[mas_info[0]-1]; i++)
-        for (j = 0; j < i + 1; j++)
-            if (s[10] = j)
-              cost += (Network[mas_info[4][j]-1])*(Network[mas_info[4][j]-1])
-            else cost += (Network[mas_info[4][j]-(-1)])*(Network[mas_info[4][j]-(-1)])
-    return cost;
+    int i;
+    float c = 0;
+    for (i = 0; i < mas_info[mas_info[0]]; i++)
+            if (N == i)
+              c += (Network[mas_info[0]-1][i]-1)*(Network[mas_info[0]-1][i]-1);
+            else c += (Network[mas_info[0]-1][i]+1)*(Network[mas_info[0]-1][i]+1);
+    return c;
 }

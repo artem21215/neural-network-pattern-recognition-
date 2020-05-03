@@ -4,7 +4,6 @@
 #include <stdio.h>
 int main()
 {
-    char s[] = "files_bmp/1.bmp";
     int kpixel = 0, *mas_info, i;
     float *a, ***Weight, **Network, ***Grad;
     a = input("files_bmp/01.bmp", a, &kpixel);
@@ -23,6 +22,7 @@ int main()
     // next: open training example
     char s[] = "files_bmp/  .bmp";
     int ed, des;
+    float sred=0;
     for (i = 0; i < 100; i++) {
         ed = i / 10;
         des = i % 10;
@@ -31,15 +31,11 @@ int main()
         a = input(s, a, &kpixel);
         Network[0] = a;
         result(Weight, Network, mas_info);
+        sred+=cost(s,Network,mas_info,i%10);
         gradient_mas(Weight, Grad, Network, mas_info, i % 10);
         // printf("%d\n", result(Weight, Network, mas_info));
     }
-    /*    for (i=0;i<mas_info[0]-1;i++)
-            for (int j=0;j<mas_info[i+2];j++)
-                for (int k=0;k<mas_info[i+1];k++)
-                {
-                    Grad[i][j][k]/=100;
-                    printf("%f ",Grad[i][j][k]);
-                }*/
+    sred/=100;
+   printf("%f",sred);
     return 0;
 }
