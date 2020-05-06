@@ -2,17 +2,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-float VComp(float* W, float* N, int n);
+float VComp(float* W, float* N, int n, float zz);
 float sigmoid(float x)
 {
     return 1 / (1 + expl(-x));
 }
-
-float difsigmoid(float x)
-{
-    return 1/(2+expl(-x)+expl(x));
-}
-
 void RandomNetwork(int kpixel)
 {
     float p;
@@ -25,7 +19,7 @@ void RandomNetwork(int kpixel)
     fwrite(&l2, sizeof(int), 1, f);
     fwrite(&l3, sizeof(int), 1, f);
     srand(time(NULL));
-    for (i = 0; i < (kpixel * l1 + l1 * l2 + l2 * l3); i++) {
+    for (i = 0; i < (kpixel * l1 + l1 * l2 + l2 * l3 + l1 + l2 + l3); i++) {
         p = float(rand()) / RAND_MAX * 10 - 5;
         fwrite(&p, sizeof(float), 1, f);
     }
@@ -46,12 +40,12 @@ float*** getW(float*** Weight)
     for (i = 0; i < nn - 1; i++) {
         Weight[i] = new float*[mas_lay[i + 1]];
         for (j = 0; j < mas_lay[i + 1]; j++)
-            Weight[i][j] = new float[mas_lay[i]];
+            Weight[i][j] = new float[mas_lay[i] + 1];
     }
 
     for (i = 0; i < nn - 1; i++) {
         for (j = 0; j < mas_lay[i + 1]; j++) {
-            for (k = 0; k < mas_lay[i]; k++) {
+            for (k = 0; k < mas_lay[i] + 1; k++) {
                 fread(&Weight[i][j][k], sizeof(float), 1, f);
             }
         }
@@ -78,34 +72,43 @@ int* get_info(int* mas_info)
 int result(float*** Weight, float** Network, int* mas_info)
 {
     int i, j;
+    float zz;
     for (i = 1; i < mas_info[0]; i++)
-        for (j = 0; j < mas_info[i + 1]; j++)
+        for (j = 0; j < mas_info[i + 1]; j++) {
+            zz = Weight[i - 1][j][mas_info[i]];
             Network[i][j]
-                    = VComp(Weight[i - 1][j], Network[i - 1], mas_info[i]);
+                    = VComp(Weight[i - 1][j], Network[i - 1], mas_info[i], zz);
+        }
     int maxx = 0;
-    for (i = 1; i < mas_info[mas_info[0]]; i++)
+    for (i = 1; i < mas_info[mas_info[0]]; i++) {
         if (Network[mas_info[0] - 1][i] > Network[mas_info[0] - 1][maxx])
             maxx = i;
+        //         printf("%f ",Network[3][i]);
+    }
+    //     puts("");
     return maxx;
 }
 
-float VComp(float* W, float* N, int n)
+float VComp(float* W, float* N, int n, float zz)
 {
     int i;
     float summ = 0;
     for (i = 0; i < n; i++)
         summ += W[i] * N[i];
-    summ = sigmoid(summ);
+    summ = sigmoid(summ + zz);
     return summ;
 }
 
-float cost(char* s, float** Network, int* mas_info,int N)
+float cost(char* s, float** Network, int* mas_info, int N)
 {
     int i;
     float c = 0;
     for (i = 0; i < mas_info[mas_info[0]]; i++)
-            if (N == i)
-              c += (Network[mas_info[0]-1][i]-1)*(Network[mas_info[0]-1][i]-1);
-            else c += (Network[mas_info[0]-1][i]+1)*(Network[mas_info[0]-1][i]+1);
+        if (N == i)
+            c += (Network[mas_info[0] - 1][i] - 1)
+                    * (Network[mas_info[0] - 1][i] - 1);
+        else
+            c += (Network[mas_info[0] - 1][i] + 1)
+                    * (Network[mas_info[0] - 1][i] + 1);
     return c;
 }
