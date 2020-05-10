@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -MP -MMD
+CFLAGS=-c -Wall -MP -MMD -g
 EXECUTABLE=bin/Network.out
 SOURSES=src/main.cpp src/input.cpp src/network.cpp src/learn.cpp
 OBJECTSS=$(SOURSES:.cpp=.out)

@@ -12,7 +12,7 @@ void RandomNetwork(int kpixel)
     float p;
     int i, layer = 4, l1 = 16, l2 = 16, l3 = 10;
     FILE* f;
-    f = fopen("src/optionnet.dat", "wb");
+    f = fopen("../optionnet.dat", "wb");
     fwrite(&layer, sizeof(int), 1, f);
     fwrite(&kpixel, sizeof(int), 1, f);
     fwrite(&l1, sizeof(int), 1, f);
@@ -38,7 +38,7 @@ float*** getW(float*** Weight)
 {
     FILE* f;
     int nn, *mas_lay, i, j, k;
-    f = fopen("src/optionnet.dat", "rb");
+    f = fopen("../optionnet.dat", "rb");
     fread(&nn, sizeof(int), 1, f);
     Weight = new float**[nn - 1];
     mas_lay = new int[nn];
@@ -66,7 +66,7 @@ int* get_info(int* mas_info)
 {
     FILE* f;
     int nn;
-    f = fopen("src/optionnet.dat", "rb");
+    f = fopen("../optionnet.dat", "rb");
     fread(&nn, sizeof(int), 1, f);
     mas_info = new int[nn + 1];
     mas_info[0] = nn;
@@ -121,7 +121,7 @@ float cost(char* s, float** Network, int* mas_info, int N)
 void Restruct(char s[], float*** Weight,int* mas_info){
     FILE* f;
     int i,j,k;
-    f = fopen("src/optionnet.dat", "wb");
+    f = fopen("../optionnet.dat", "wb");
     for (i=0;i<mas_info[0]+1;i++)
         fwrite(&mas_info[i], sizeof(int), 1, f);
     for (i=0;i<mas_info[0];i++){    

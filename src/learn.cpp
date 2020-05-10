@@ -65,8 +65,8 @@ void learnW(
     for (i = 0; i < N; i++) {
         ed = i / 10;
         des = i % 10;
-        s[10] = ed + 48;
-        s[11] = des + 48;
+        s[13] = ed + 48;
+        s[14] = des + 48;
         a = input(s, a, &kpixel);
         Network[0] = a;
         t = result(Weight, Network, mas_info);
@@ -76,6 +76,6 @@ void learnW(
             *kk += 1;
         // printf("%f ",cost(s,Network,mas_info,i%10));
         //if (*kk>34)
-        //    printf("%d - %d\n",i%10,t);
+        //   printf("%d - %d\n",i%10,t);
     }
 }

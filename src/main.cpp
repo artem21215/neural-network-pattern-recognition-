@@ -7,14 +7,13 @@ int main()
 {
     int kpixel = 0, *mas_info, i;
     float *a, ***Weight, **Network, ***Grad;
-    a = input("files_bmp/01.bmp", a, &kpixel);
+    a = input("../files_bmp/01.bmp", a, &kpixel);
     // RandomNetwork(kpixel);
     Weight = getW(Weight);
     mas_info = get_info(mas_info);
     Network = CreateNet(Network, mas_info);
     Grad = CreateGrad(Grad, mas_info);
-    // next: open training example
-    char s[] = "files_bmp/  .bmp";
+    char s[] = "../files_bmp/  .bmp";
     int kk, N = 100;
     float sred;
     for (int l = 0; l < 3000; l++) {
@@ -38,6 +37,6 @@ int main()
         if (l % 100 == 0)
             printf("%f\n", sred);
     }
-    Restruct("src/optionnet.dat", Weight, mas_info);
+    Restruct("../optionnet.dat", Weight, mas_info);
     return 0;
 }
