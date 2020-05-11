@@ -60,7 +60,7 @@ void learnW(
         int kpixel)
 {
     int ed, des, t, i;
-        *kk = 0;
+    *kk = 0;
     *sred = 0;
     for (i = 0; i < N; i++) {
         ed = i / 10;
@@ -75,7 +75,7 @@ void learnW(
         if (t == i % 10)
             *kk += 1;
         // printf("%f ",cost(s,Network,mas_info,i%10));
-        //if (*kk>34)
+        // if (*kk>34)
         //   printf("%d - %d\n",i%10,t);
     }
 }
