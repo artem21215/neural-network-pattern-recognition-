@@ -46,7 +46,6 @@ void gradient_mas(
         }
     }
 }
-
 void learnW(
         float** Network,
         float*** Weight,
