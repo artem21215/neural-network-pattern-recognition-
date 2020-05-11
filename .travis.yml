@@ -1,7 +1,7 @@
 language: C++
 dist: xenial
 install:
-  - sudo apt-get --no-install-recomends cxxtest
+  - sudo apt-get --no-install-recommends -y install cxxtest
 script:
   - make
   - make test

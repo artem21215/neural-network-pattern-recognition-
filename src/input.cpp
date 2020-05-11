@@ -82,4 +82,3 @@ void printpixel(int arr[], int n)
     }
     puts("");
 }
-

@@ -15,4 +15,3 @@ void learnW(
         float* a,
         int kpixel);
 #endif
-
