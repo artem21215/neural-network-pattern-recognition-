@@ -1,8 +1,9 @@
 #include "input.h"
 #include "network.h"
 #include <stdio.h>
-float*** CreateGrad(float*** Grad, int* mas_info)
+float*** CreateGrad(int* mas_info)
 {
+    float*** Grad;
     int i, j;
     Grad = new float**[mas_info[0] - 1];
     for (i = 0; i < (mas_info[0] - 1); i++) {
@@ -20,7 +21,6 @@ void gradient_mas(
         float*** Weight, float*** Grad, float** Network, int* mas_info, int N)
 {
     int i, j, k, y;
-    float summ = 0;
     float** dCda;
     dCda = new float*[mas_info[0]];
     for (i = 0; i < mas_info[0]; i++) {
@@ -66,7 +66,7 @@ void learnW(
         des = i % 10;
         s[13] = ed + 48;
         s[14] = des + 48;
-        a = input(s, a, &kpixel);
+        a = input(s, &kpixel);
         Network[0] = a;
         t = result(Weight, Network, mas_info);
         *sred += cost(s, Network, mas_info, i % 10);

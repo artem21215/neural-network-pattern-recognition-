@@ -16,4 +16,9 @@ public:
         TS_ASSERT(sigmoid(-1000000)>=0);
         TS_ASSERT(sigmoid(-1000000)<0.1);
     }
+public:
+    void test_getw(void)
+    {
+        getW(float*** Weight);
+    }
 };

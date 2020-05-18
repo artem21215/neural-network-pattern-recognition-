@@ -27,16 +27,18 @@ void RandomNetwork(int kpixel)
     fclose(f);
 }
 
-float** CreateNet(float** Network, int* mas_info)
+float** CreateNet(int* mas_info)
 {
+    float** Network;
     Network = new float*[mas_info[0]];
     for (int i = 0; i < mas_info[0]; i++)
         Network[i] = new float[mas_info[i + 1]];
     return Network;
 }
 
-float*** getW(float*** Weight)
+float*** getW()
 {
+    float*** Weight;
     FILE* f;
     int nn, *mas_lay, i, j, k;
     f = fopen("../optionnet.dat", "rb");
@@ -63,8 +65,9 @@ float*** getW(float*** Weight)
     return Weight;
 }
 
-int* get_info(int* mas_info)
+int* get_info()
 {
+    int* mas_info;
     FILE* f;
     int nn;
     f = fopen("../optionnet.dat", "rb");
