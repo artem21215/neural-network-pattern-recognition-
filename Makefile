@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -MP -MMD -g
+CFLAGS=-c -Wall -Werror -MP -MMD -g
 TESTFLAGS=-I src -I thirdparty -c -Wall
 EXECUTABLE=bin/Network.out
 SOURSES=src/main.cpp src/input.cpp src/network.cpp src/learn.cpp

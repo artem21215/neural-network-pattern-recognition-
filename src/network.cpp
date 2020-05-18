@@ -122,7 +122,7 @@ float cost(char* s, float** Network, int* mas_info, int N)
     return c;
 }
 
-void Restruct(char s[], float*** Weight, int* mas_info)
+void Restruct(const char s[], float*** Weight, int* mas_info)
 {
     FILE* f;
     int i, j, k;

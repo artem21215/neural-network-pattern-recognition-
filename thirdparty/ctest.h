@@ -19,6 +19,6 @@ public:
 public:
     void test_getw(void)
     {
-        getW(float*** Weight);
+        getW();
     }
 };
