@@ -3,16 +3,18 @@
 #include "network.h"
 #include <stdio.h>
 #define DELTA 2400
+#define NETFILE "../optionnet.dat"
 int main()
 {
     int kpixel = 0, *mas_info, i;
     float *a, ***Weight, **Network, ***Grad;
     a = input("../files_bmp/01.bmp", &kpixel);
     // RandomNetwork(kpixel);
-    Weight = getW();
+    Weight = getW(NETFILE);
     mas_info = get_info();
     Network = CreateNet(mas_info);
     Grad = CreateGrad(mas_info);
+    delete a;
     char s[] = "../files_bmp/  .bmp";
     int kk, N = 100;
     float sred;

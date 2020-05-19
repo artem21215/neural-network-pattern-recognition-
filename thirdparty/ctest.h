@@ -1,11 +1,8 @@
 #include "input.h"
 #include "learn.h"
 #include "network.h"
+#include <stdio.h>
 #include <cxxtest/TestSuite.h>
-#include <iostream>
-using namespace std;
-const int n = 5;
-
 class MoveTest : public CxxTest::TestSuite {
 public:
     void test_sigm(void)
@@ -56,5 +53,36 @@ public:
                 TS_ASSERT_EQUALS(a[i],1);
         }
     }
-
+public:
+    void test_getW(void)
+    {
+        int i,j;
+        float*** w;
+        float z;
+        FILE* f;
+        char s[]="../thirdparty/testfiles/1.dat";
+        f=fopen(s,"rb");
+        w=getW(s);
+        for (i=0;i<5;i++)
+            fread(&z,sizeof(int),1,f);
+        for (i=0;i<16;i++)
+            for (j=0;j<785;j++){
+                fread(&z,sizeof(float),1,f);
+                TS_ASSERT_EQUALS(z,w[0][i][j]);
+                z++;
+            }
+        for (i=0;i<16;i++)
+            for (j=0;j<17;j++){
+                fread(&z,sizeof(float),1,f);
+                TS_ASSERT_EQUALS(z,w[1][i][j]);
+                z++;
+            }
+        for (i=0;i<10;i++)
+            for (j=0;j<17;j++){
+                fread(&z,sizeof(float),1,f);
+                TS_ASSERT_EQUALS(z,w[2][i][j]);
+                z++;
+            }
+        fclose(f);
+    }
 };

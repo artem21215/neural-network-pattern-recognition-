@@ -36,12 +36,12 @@ float** CreateNet(int* mas_info)
     return Network;
 }
 
-float*** getW()
+float*** getW(const char s[])
 {
     float*** Weight;
     FILE* f;
     int nn, *mas_lay, i, j, k;
-    f = fopen("../optionnet.dat", "rb");
+    f = fopen(s, "rb");
     fread(&nn, sizeof(int), 1, f);
     Weight = new float**[nn - 1];
     mas_lay = new int[nn];

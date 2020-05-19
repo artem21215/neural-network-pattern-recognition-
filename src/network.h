@@ -2,7 +2,7 @@
 #define _Network
 float sigmoid(float x);
 void RandomNetwork(int kpixel);
-float*** getW();
+float*** getW(const char s[]);
 int* get_info();
 int result(float*** Weight, float** Network, int* mas_info);
 float VComp(float* W, float* N, int n, float zz);
