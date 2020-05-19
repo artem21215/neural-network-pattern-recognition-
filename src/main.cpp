@@ -11,7 +11,7 @@ int main()
     a = input("../files_bmp/01.bmp", &kpixel);
     // RandomNetwork(kpixel);
     Weight = getW(NETFILE);
-    mas_info = get_info();
+    mas_info = get_info(NETFILE);
     Network = CreateNet(mas_info);
     Grad = CreateGrad(mas_info);
     delete a;

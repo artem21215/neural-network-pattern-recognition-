@@ -65,12 +65,12 @@ float*** getW(const char s[])
     return Weight;
 }
 
-int* get_info()
+int* get_info(const char s[])
 {
     int* mas_info;
     FILE* f;
     int nn;
-    f = fopen("../optionnet.dat", "rb");
+    f = fopen(s, "rb");
     fread(&nn, sizeof(int), 1, f);
     mas_info = new int[nn + 1];
     mas_info[0] = nn;

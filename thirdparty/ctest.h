@@ -85,4 +85,15 @@ public:
             }
         fclose(f);
     }
+public:
+    void test_get_info(void)
+    {
+        int* a;
+        a=get_info("../thirdparty/testfiles/1.dat");
+        TS_ASSERT_EQUALS(a[0],4);
+        TS_ASSERT_EQUALS(a[1],784);
+        TS_ASSERT_EQUALS(a[2],16);
+        TS_ASSERT_EQUALS(a[3],16);
+        TS_ASSERT_EQUALS(a[4],10);
+    }
 };

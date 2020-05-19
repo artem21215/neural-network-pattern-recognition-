@@ -3,7 +3,7 @@
 float sigmoid(float x);
 void RandomNetwork(int kpixel);
 float*** getW(const char s[]);
-int* get_info();
+int* get_info(const char s[]);
 int result(float*** Weight, float** Network, int* mas_info);
 float VComp(float* W, float* N, int n, float zz);
 float difsigmoid(float x);
