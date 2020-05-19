@@ -32,4 +32,29 @@ public:
             TS_ASSERT_EQUALS(l,i);
         }
     }
+public:
+    void test_input(void)
+    {
+        float* a;
+        int kpixel;
+        a=input("../thirdparty/testfiles/wb.bmp",&kpixel);
+        for (int i=0;i<kpixel/2;i++)
+            TS_ASSERT_EQUALS(a[i],0);
+        for (int i=kpixel/2;i<kpixel;i++)
+            TS_ASSERT_EQUALS(a[i],1);
+        a=input("../thirdparty/testfiles/bw.bmp",&kpixel);
+        for (int i=0;i<kpixel/2;i++)
+            TS_ASSERT_EQUALS(a[i],1);
+        for (int i=kpixel/2;i<kpixel;i++)
+            TS_ASSERT_EQUALS(a[i],0);
+        a=input("../thirdparty/testfiles/bw2.bmp",&kpixel);
+        for (int i=0;i<kpixel;i++){
+            if (i%28<14){
+                TS_ASSERT_EQUALS(a[i],0);
+            }
+            else
+                TS_ASSERT_EQUALS(a[i],1);
+        }
+    }
+
 };
