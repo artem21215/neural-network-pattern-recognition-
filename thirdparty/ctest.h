@@ -17,8 +17,19 @@ public:
         TS_ASSERT(sigmoid(-1000000)<0.1);
     }
 public:
-    void test_getw(void)
+    void test_bitetobin(void)
     {
-        getW();
+        int b[8],l,z;
+        for (int i=0;i<256;i++){
+            l=0;
+            z=1;
+            bitetobin(i, b);
+            for (int j=7;j>=0;j--){
+                if (b[j]==1)
+                    l+=z;
+                z*=2;
+            }
+            TS_ASSERT_EQUALS(l,i);
+        }
     }
 };
