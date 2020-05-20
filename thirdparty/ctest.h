@@ -96,4 +96,59 @@ public:
         TS_ASSERT_EQUALS(a[3],16);
         TS_ASSERT_EQUALS(a[4],10);
     }
+public:
+    void test_result(void)
+    {
+        float*** w;
+        float** n;
+        int *inf,i,j,k;
+        inf=new int[4];
+        inf[0]=3;
+        inf[1]=5;
+        inf[2]=3;
+        inf[3]=2;
+        n=CreateNet(inf);
+        w=new float**[inf[0]-1];
+        for (i=0;i<inf[0]-1;i++){
+            w[i]=new float*[inf[i+2]];
+            for (j=0;j<inf[i+2];j++){
+                w[i][j]=new float[inf[i+1]+1];
+            }
+        }
+        for (i=0;i<inf[1];i++)
+            n[0][i]=i+1;
+        float z=++i;
+        for (i=0;i<inf[0]-1;i++)
+            for (j=0;j<inf[i+2];j++)
+                for (k=0;k<inf[i+1]+1;k++)
+                    w[i][j][k]=z++;
+        w[0][0][5]=-129;
+        w[0][1][5]=-225;
+        w[0][2][5]=-305;
+        w[1][0][3]=-44;
+        w[1][1][3]=-50;
+        result(w,n,inf);
+        TS_ASSERT_EQUALS(n[1][0],sigmoid(1));
+        TS_ASSERT_EQUALS(n[1][1],sigmoid(-5));
+        TS_ASSERT_EQUALS(n[1][2],sigmoid(5));
+        TS_ASSERT_EQUALS(n[2][0],VComp(w[1][0],n[1],3,-44));
+        TS_ASSERT_EQUALS(n[2][1],VComp(w[1][1],n[1],3,-50));
+        TS_ASSERT((int)(sigmoid(0.2658)-n[2][0])<1);
+        TS_ASSERT((int)(sigmoid(0.4584)-n[2][1])<1);
+        
+    }
+public:
+    void test_cost(void)
+    {
+        int inf[3];
+        float **n;
+        inf[0]=2;
+        inf[1]=3;
+        inf[2]=2;
+        n=CreateNet(inf);
+        n[1][0]=0;
+        n[1][1]=1;
+        TS_ASSERT_EQUALS(cost(n,inf,1),0);
+        TS_ASSERT_EQUALS(cost(n,inf,0),2);
+    }
 };

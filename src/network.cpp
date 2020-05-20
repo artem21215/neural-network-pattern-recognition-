@@ -29,10 +29,14 @@ void RandomNetwork(int kpixel)
 
 float** CreateNet(int* mas_info)
 {
+    int i, j;
     float** Network;
     Network = new float*[mas_info[0]];
-    for (int i = 0; i < mas_info[0]; i++)
+    for (i = 0; i < mas_info[0]; i++) {
         Network[i] = new float[mas_info[i + 1]];
+        for (j = 0; j < mas_info[i + 1]; j++)
+            Network[i][j] = 0;
+    }
     return Network;
 }
 
@@ -108,7 +112,7 @@ float VComp(float* W, float* N, int n, float zz)
     return summ;
 }
 
-float cost(char* s, float** Network, int* mas_info, int N)
+float cost(float** Network, int* mas_info, int N)
 {
     int i;
     float c = 0;
@@ -117,7 +121,7 @@ float cost(char* s, float** Network, int* mas_info, int N)
             c += (Network[mas_info[0] - 1][i] - 1)
                     * (Network[mas_info[0] - 1][i] - 1);
         else
-            c += (Network[mas_info[0] - 1][i] + 1)
+            c += (Network[mas_info[0] - 1][i] + 0)
                     * (Network[mas_info[0] - 1][i] + 0);
     return c;
 }

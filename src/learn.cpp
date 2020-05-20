@@ -69,7 +69,7 @@ void learnW(
         a = input(s, &kpixel);
         Network[0] = a;
         t = result(Weight, Network, mas_info);
-        *sred += cost(s, Network, mas_info, i % 10);
+        *sred += cost(Network, mas_info, i % 10);
         gradient_mas(Weight, Grad, Network, mas_info, i % 10);
         if (t == i % 10)
             *kk += 1;

@@ -39,6 +39,6 @@ int main()
         if (l % 100 == 0)
             printf("%f\n", sred);
     }
-    Restruct("../optionnet.dat", Weight, mas_info);
+    Restruct(NETFILE, Weight, mas_info);
     return 0;
 }
