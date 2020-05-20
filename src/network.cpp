@@ -7,12 +7,12 @@ float sigmoid(float x)
 {
     return 1 / (1 + expl(-x));
 }
-void RandomNetwork(int kpixel)
+void RandomNetwork(const char s[], int kpixel)
 {
     float p;
     int i, layer = 4, l1 = 16, l2 = 16, l3 = 10;
     FILE* f;
-    f = fopen("../optionnet.dat", "wb");
+    f = fopen(s, "wb");
     fwrite(&layer, sizeof(int), 1, f);
     fwrite(&kpixel, sizeof(int), 1, f);
     fwrite(&l1, sizeof(int), 1, f);
@@ -130,7 +130,7 @@ void Restruct(const char s[], float*** Weight, int* mas_info)
 {
     FILE* f;
     int i, j, k;
-    f = fopen("../optionnet.dat", "wb");
+    f = fopen(s, "wb");
     for (i = 0; i < mas_info[0] + 1; i++)
         fwrite(&mas_info[i], sizeof(int), 1, f);
     for (i = 0; i < mas_info[0]; i++) {

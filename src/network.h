@@ -1,7 +1,7 @@
 #ifndef _Network
 #define _Network
 float sigmoid(float x);
-void RandomNetwork(int kpixel);
+void RandomNetwork(const char s[], int kpixel);
 float*** getW(const char s[]);
 int* get_info(const char s[]);
 int result(float*** Weight, float** Network, int* mas_info);

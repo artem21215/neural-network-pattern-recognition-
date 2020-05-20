@@ -9,7 +9,7 @@ int main()
     int kpixel = 0, *mas_info, i;
     float *a, ***Weight, **Network, ***Grad;
     a = input("../files_bmp/01.bmp", &kpixel);
-    // RandomNetwork(kpixel);
+    // RandomNetwork(NETFILE,kpixel);
     Weight = getW(NETFILE);
     mas_info = get_info(NETFILE);
     Network = CreateNet(mas_info);
