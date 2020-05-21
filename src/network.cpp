@@ -64,7 +64,7 @@ float*** getW(const char s[])
             }
         }
     }
-
+    delete[] mas_lay;
     fclose(f);
     return Weight;
 }
