@@ -151,4 +151,32 @@ public:
         TS_ASSERT_EQUALS(cost(n,inf,1),0);
         TS_ASSERT_EQUALS(cost(n,inf,0),2);
     }
+public:
+    void test_restruct(void)
+    {
+        int inf[3];
+        float ***w,***W;
+        const char s[]="../thirdparty/testfiles/2.dat";
+        inf[0]=2;
+        inf[1]=2;
+        inf[2]=2;
+        w=new float**[1];
+        w[0]=new float*[2];
+        w[0][0]=new float[3];
+        w[0][1]=new float[3];
+        w[0][0][0]=1;
+        w[0][0][1]=2;
+        w[0][0][2]=3;
+        w[0][1][0]=4;
+        w[0][1][1]=5;
+        w[0][1][2]=6;
+        Restruct(s, w, inf);
+        W=getW(s);
+        TS_ASSERT_EQUALS(W[0][0][0],w[0][0][0]);
+        TS_ASSERT_EQUALS(W[0][0][1],w[0][0][1]);
+        TS_ASSERT_EQUALS(W[0][0][2],w[0][0][2]);
+        TS_ASSERT_EQUALS(W[0][1][0],w[0][1][0]);
+        TS_ASSERT_EQUALS(W[0][1][1],w[0][1][1]);
+        TS_ASSERT_EQUALS(W[0][1][2],w[0][1][2]);
+    }
 };
