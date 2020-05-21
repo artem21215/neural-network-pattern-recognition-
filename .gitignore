@@ -1,6 +1,5 @@
 *.o
 *.swp
-files_bmp
 *.out
 *.d
 test/*.cpp
