@@ -7,12 +7,12 @@ float sigmoid(float x)
 {
     return 1 / (1 + expl(-x));
 }
-void RandomNetwork(int kpixel)
+void RandomNetwork(const char s[], int kpixel)
 {
     float p;
     int i, layer = 4, l1 = 16, l2 = 16, l3 = 10;
     FILE* f;
-    f = fopen("src/optionnet.dat", "wb");
+    f = fopen(s, "wb");
     fwrite(&layer, sizeof(int), 1, f);
     fwrite(&kpixel, sizeof(int), 1, f);
     fwrite(&l1, sizeof(int), 1, f);
@@ -20,25 +20,32 @@ void RandomNetwork(int kpixel)
     fwrite(&l3, sizeof(int), 1, f);
     srand(time(NULL));
     for (i = 0; i < (kpixel * l1 + l1 * l2 + l2 * l3 + l1 + l2 + l3); i++) {
-        p = float(rand()) / RAND_MAX * 10-5;
+        p = float(rand()) / RAND_MAX * 10 - 5;
         fwrite(&p, sizeof(float), 1, f);
     }
 
     fclose(f);
 }
 
-float** CreateNet(float** Network,int* mas_info){
-    Network=new float*[mas_info[0]];
-    for (int i=0;i<mas_info[0];i++)
-        Network[i]=new float[mas_info[i+1]];
-return Network;
+float** CreateNet(int* mas_info)
+{
+    int i, j;
+    float** Network;
+    Network = new float*[mas_info[0]];
+    for (i = 0; i < mas_info[0]; i++) {
+        Network[i] = new float[mas_info[i + 1]];
+        for (j = 0; j < mas_info[i + 1]; j++)
+            Network[i][j] = 0;
+    }
+    return Network;
 }
 
-float*** getW(float*** Weight)
+float*** getW(const char s[])
 {
+    float*** Weight;
     FILE* f;
     int nn, *mas_lay, i, j, k;
-    f = fopen("src/optionnet.dat", "rb");
+    f = fopen(s, "rb");
     fread(&nn, sizeof(int), 1, f);
     Weight = new float**[nn - 1];
     mas_lay = new int[nn];
@@ -57,16 +64,17 @@ float*** getW(float*** Weight)
             }
         }
     }
-
+    delete[] mas_lay;
     fclose(f);
     return Weight;
 }
 
-int* get_info(int* mas_info)
+int* get_info(const char s[])
 {
+    int* mas_info;
     FILE* f;
     int nn;
-    f = fopen("src/optionnet.dat", "rb");
+    f = fopen(s, "rb");
     fread(&nn, sizeof(int), 1, f);
     mas_info = new int[nn + 1];
     mas_info[0] = nn;
@@ -104,7 +112,7 @@ float VComp(float* W, float* N, int n, float zz)
     return summ;
 }
 
-float cost(char* s, float** Network, int* mas_info, int N)
+float cost(float** Network, int* mas_info, int N)
 {
     int i;
     float c = 0;
@@ -113,20 +121,21 @@ float cost(char* s, float** Network, int* mas_info, int N)
             c += (Network[mas_info[0] - 1][i] - 1)
                     * (Network[mas_info[0] - 1][i] - 1);
         else
-            c += (Network[mas_info[0] - 1][i] + 1)
+            c += (Network[mas_info[0] - 1][i] + 0)
                     * (Network[mas_info[0] - 1][i] + 0);
     return c;
 }
 
-void Restruct(char s[], float*** Weight,int* mas_info){
+void Restruct(const char s[], float*** Weight, int* mas_info)
+{
     FILE* f;
-    int i,j,k;
-    f = fopen("src/optionnet.dat", "wb");
-    for (i=0;i<mas_info[0]+1;i++)
+    int i, j, k;
+    f = fopen(s, "wb");
+    for (i = 0; i < mas_info[0] + 1; i++)
         fwrite(&mas_info[i], sizeof(int), 1, f);
-    for (i=0;i<mas_info[0];i++){    
-        for (j=0;j<mas_info[i+2];j++){
-            for (k=0;k<mas_info[i+1]+1;k++){
+    for (i = 0; i < mas_info[0] - 1; i++) {
+        for (j = 0; j < mas_info[i + 2]; j++) {
+            for (k = 0; k < mas_info[i + 1] + 1; k++) {
                 fwrite(&Weight[i][j][k], sizeof(float), 1, f);
             }
         }

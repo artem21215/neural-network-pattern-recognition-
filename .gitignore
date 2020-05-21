@@ -1,6 +1,5 @@
 *.o
 *.swp
-*.bmp
 *.out
 *.d
-thirdparty
+test/*.cpp
