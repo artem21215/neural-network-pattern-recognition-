@@ -133,7 +133,7 @@ void Restruct(const char s[], float*** Weight, int* mas_info)
     f = fopen(s, "wb");
     for (i = 0; i < mas_info[0] + 1; i++)
         fwrite(&mas_info[i], sizeof(int), 1, f);
-    for (i = 0; i < mas_info[0]; i++) {
+    for (i = 0; i < mas_info[0] - 1; i++) {
         for (j = 0; j < mas_info[i + 2]; j++) {
             for (k = 0; k < mas_info[i + 1] + 1; k++) {
                 fwrite(&Weight[i][j][k], sizeof(float), 1, f);
