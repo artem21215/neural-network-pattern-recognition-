@@ -32,8 +32,8 @@ float* input(const char s[], int* kpixel)
         for (i = 0; i < bitew; i++) {
             z = 0;
             fread(&z, 1, 1, f);
-            for (int j = 0; j < 8; j++)
-                b[j] = 0;
+            for (int mj = 0; mj < 8; mj++)
+                b[mj] = 0;
 
             bitetobin(z, b);
             for (int jj = 0; jj < 8; jj++) {

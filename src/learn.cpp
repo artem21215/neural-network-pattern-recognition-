@@ -64,7 +64,7 @@ void learnW(
     Network = CreateNet(mas_info);
     *kk = 0;
     *sred = 0;
-    for (i = 1; i < N; i++) {
+    for (i = 0; i < N; i++) {
         ed = i / 10;
         des = i % 10;
         s[13] = ed + 48;
@@ -78,12 +78,9 @@ void learnW(
         if (t == i % 10)
             *kk += 1;
         delete[] Network[0];
-        Network[0] = nullptr;
-        // printf("%f ",cost(s,Network,mas_info,i%10));
-        // if (*kk>34)
-        //   printf("%d - %d\n",i%10,t);
+        // Network[0] = nullptr;
     }
-    for (i = 0; i < mas_info[0]; i++)
+    for (i = 1; i < mas_info[0]; i++)
         delete[] Network[i];
     delete[] Network;
 }
