@@ -45,7 +45,7 @@ void gradient_mas(
             }
         }
     }
-    for (i=0;i<mas_info[0];i++)
+    for (i = 0; i < mas_info[0]; i++)
         delete[] dCda[i];
     delete[] dCda;
 }
@@ -61,7 +61,7 @@ void learnW(
     int ed, des, t, i;
     int kpixel;
     float** Network;
-    Network=CreateNet(mas_info);
+    Network = CreateNet(mas_info);
     *kk = 0;
     *sred = 0;
     for (i = 1; i < N; i++) {
@@ -71,19 +71,19 @@ void learnW(
         s[14] = des + 48;
         Network[0] = input(s, &kpixel);
         t = result(Weight, Network, mas_info);
-        if (N==50)
-            printf("%d - %d\n",i%10,t);
+        if (N == 50)
+            printf("%d - %d\n", i % 10, t);
         *sred += cost(Network, mas_info, i % 10);
         gradient_mas(Weight, Grad, Network, mas_info, i % 10);
         if (t == i % 10)
             *kk += 1;
         delete[] Network[0];
-        Network[0]=nullptr;
+        Network[0] = nullptr;
         // printf("%f ",cost(s,Network,mas_info,i%10));
         // if (*kk>34)
         //   printf("%d - %d\n",i%10,t);
     }
-    for (i=0;i<mas_info[0];i++)
+    for (i = 0; i < mas_info[0]; i++)
         delete[] Network[i];
     delete[] Network;
 }
