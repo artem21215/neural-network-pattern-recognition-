@@ -71,8 +71,8 @@ void learnW(
         s[14] = des + 48;
         Network[0] = input(s, &kpixel);
         t = result(Weight, Network, mas_info);
-        if (N == 50)
-            printf("%d - %d\n", i % 10, t);
+        if (N != 100)
+            printf("%d - хммм, умный я, думаю что это цифра %d\n", i % 10, t);
         *sred += cost(Network, mas_info, i % 10);
         gradient_mas(Weight, Grad, Network, mas_info, i % 10);
         if (t == i % 10)

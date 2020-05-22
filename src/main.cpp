@@ -48,9 +48,7 @@ int main()
         Restruct(NETFILE, Weight, mas_info);
         break;
     case '1':
-        for (l = 0; l < 1; l++) {
-            learnW(Weight, mas_info, Grad, 50, &kk, &sred, s);
-        }
+        learnW(Weight, mas_info, Grad, 50, &kk, &sred, s);
         break;
     }
     return 0;
